@@ -1,10 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pembayaran PStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
         }
 
         body {
-            background-color: #0a0a0a;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
             color: #e0e0e0;
             min-height: 100vh;
             display: flex;
@@ -32,6 +32,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             border: 1px solid #333;
+            margin-bottom: 30px;
         }
 
         .header {
@@ -48,27 +49,56 @@
             margin-bottom: 15px;
         }
 
-        .logo {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #ff9500, #ff5e3a);
-            border-radius: 12px;
+        .apple-logo {
+            width: 60px;
+            height: 60px;
+            background-color: #000000;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
-            box-shadow: 0 4px 10px rgba(255, 149, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
         }
 
-        .logo i {
-            color: white;
-            font-size: 24px;
+        .apple-logo::before {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50% 50% 50% 50%;
+            clip-path: polygon(
+                50% 0%, 
+                80% 20%, 
+                100% 50%, 
+                80% 80%, 
+                50% 100%, 
+                20% 80%, 
+                0% 50%, 
+                20% 20%
+            );
+        }
+
+        /* Efek gigitan di sebelah kanan */
+        .apple-logo::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #000000;
+            border-radius: 50%;
+            top: 15px;
+            right: 8px;
+            transform: rotate(45deg);
         }
 
         .store-name {
             font-size: 28px;
             font-weight: 700;
-            background: linear-gradient(to right, #ff9500, #ff5e3a);
+            background: linear-gradient(to right, #ffffff, #a0a0a0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -132,6 +162,7 @@
             width: 100%;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 131, 255, 0.3);
+            text-decoration: none;
         }
 
         .dana-button:hover {
@@ -184,14 +215,14 @@
         .step-number {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, #ff9500, #ff5e3a);
+            background: linear-gradient(135deg, #ffffff, #a0a0a0);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             margin-bottom: 8px;
-            color: white;
+            color: #000000;
         }
 
         .step-text {
@@ -199,8 +230,77 @@
             color: #aaa;
         }
 
+        .social-media {
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid #333;
+            padding: 25px;
+        }
+
+        .social-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #f0f0f0;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-button {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, #128C7E, #075E54);
+        }
+
+        .tiktok-button {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .tiktok-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #333333, #000000);
+        }
+
+        .social-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+
         @media (max-width: 480px) {
-            .container {
+            .container, .social-media {
                 border-radius: 15px;
             }
             
@@ -216,20 +316,17 @@
                 font-size: 24px;
             }
             
-            .title {
+            .title, .social-title {
                 font-size: 20px;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <div class="logo">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
+                <div class="apple-logo"></div>
                 <h1 class="store-name">PSTORE</h1>
             </div>
             <h2 class="title">Pembayaran</h2>
@@ -245,11 +342,9 @@
             
             <div class="payment-method">
                 <div class="method-title">Metode Pembayaran</div>
-                <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012092025110238691307" target="_blank">
-                    <button class="dana-button">
-                        <div class="dana-logo">D</div>
-                        Dana
-                    </button>
+                <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012092025110238691307" target="_blank" class="dana-button">
+                    <div class="dana-logo">D</div>
+                    Dana
                 </a>
             </div>
             
@@ -273,7 +368,19 @@
             &copy; 2023 PStore. All rights reserved.
         </div>
     </div>
+    
+    <div class="social-media">
+        <h2 class="social-title">Media Resmi Kami</h2>
+        <div class="social-buttons">
+            <a href="https://wa.me/6285860647972" target="_blank" class="social-button whatsapp-button">
+                <i class="fab fa-whatsapp social-icon"></i>
+                WhatsApp
+            </a>
+            <a href="https://www.tiktok.com/@pstore_officiall6?_r=1&_t=ZS-912rpH0qiaf" target="_blank" class="social-button tiktok-button">
+                <i class="fab fa-tiktok social-icon"></i>
+                TikTok
+            </a>
+        </div>
+    </div>
 </body>
 </html>
-
-
